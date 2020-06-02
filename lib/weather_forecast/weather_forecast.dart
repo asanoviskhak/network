@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:network/weather_forecast/model/weather_forecast_model.dart';
 import 'package:network/weather_forecast/network/network.dart';
+import 'package:network/weather_forecast/ui/bottom_view.dart';
 import 'dart:convert';
 
 import 'ui/body_view.dart';
@@ -34,6 +35,7 @@ class _WeatherState extends State<WeatherForecast>{
                   return Column(
                     children: <Widget>[
                       bodyView(snapshot),
+                      bottomView(snapshot, context),
                     ],
                   );
                 }

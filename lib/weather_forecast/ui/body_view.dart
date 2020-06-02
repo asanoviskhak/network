@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:network/weather_forecast/model/weather_forecast_model.dart';
+import 'package:network/weather_forecast/util/convert_icon.dart';
 import 'package:network/weather_forecast/util/forecast_util.dart';
 
 Widget bodyView(AsyncSnapshot<WeatherForecastModel> snapshot){
@@ -27,7 +28,11 @@ Widget bodyView(AsyncSnapshot<WeatherForecastModel> snapshot){
             fontSize: 14
           ),),
           SizedBox(height: 10,),
-          Icon(FontAwesomeIcons.cloud, size: 120,),
+          //Icon(FontAwesomeIcons.cloud, size: 120,),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: getWeatherIcon(description: forecast1.weather[0].main, color: Colors.black, size: 120),
+          ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 12),
             child: Row(
@@ -36,7 +41,7 @@ Widget bodyView(AsyncSnapshot<WeatherForecastModel> snapshot){
                 Text("${forecast1.main.temp.toStringAsFixed(0)}℃", style: TextStyle(
                   fontSize: 36,
                 ),),
-                Text("${forecast1.weather[0].description.toUpperCase()}"),
+                Text(" ${forecast1.weather[0].description.toUpperCase()}"),
               ],
             ),
           ),
@@ -52,7 +57,7 @@ Widget bodyView(AsyncSnapshot<WeatherForecastModel> snapshot){
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Text("${forecast1.wind.speed.toStringAsFixed(1)} km/h"),
-                      Icon(FontAwesomeIcons.temperatureHigh, size: 20, color: Colors.blueGrey[900])
+                      Icon(FontAwesomeIcons.wind, size: 20, color: Colors.blueGrey[900])
                     ],
                   ),
                 ),
@@ -62,7 +67,7 @@ Widget bodyView(AsyncSnapshot<WeatherForecastModel> snapshot){
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Text("${forecast1.main.humidity.toStringAsFixed(0)}%"),
-                      Icon(Icons.hot_tub, size: 20, color: Colors.blueGrey[900])
+                      Icon(FontAwesomeIcons.solidGrinBeamSweat, size: 20, color: Colors.blueGrey[900])
                     ],
                   ),
                 ),
@@ -72,7 +77,7 @@ Widget bodyView(AsyncSnapshot<WeatherForecastModel> snapshot){
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Text("${forecast1.main.tempMax.toStringAsFixed(0)}℃"),
-                      Icon(Icons.wb_sunny, size: 20, color: Colors.blueGrey[900])
+                      Icon(FontAwesomeIcons.temperatureHigh, size: 20, color: Colors.blueGrey[900])
                     ],
                   ),
                 ),

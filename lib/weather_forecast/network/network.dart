@@ -11,7 +11,7 @@ class Network{
     final response = await get(Uri.encodeFull(finalUrl));
     print("URL: ${Uri.encodeFull(finalUrl)}");
     if (response.statusCode == 200){
-      print("GETTING WEATHER DATA!");
+      print("GETTING WEATHER DATA! : ${response.body}");
       return WeatherForecastModel.fromJson(json.decode(response.body)); //we get actual mapped model (dart object)
     }
     else{

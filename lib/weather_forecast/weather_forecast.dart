@@ -4,6 +4,7 @@ import 'package:network/weather_forecast/network/network.dart';
 import 'package:network/weather_forecast/ui/bottom_view.dart';
 import 'dart:convert';
 
+import 'model/weather_forecast_model2.dart';
 import 'ui/body_view.dart';
 class WeatherForecast extends StatefulWidget{
   @override
@@ -11,7 +12,7 @@ class WeatherForecast extends StatefulWidget{
 }
 
 class _WeatherState extends State<WeatherForecast>{
-  Future<WeatherForecastModel> forecastObject;
+  Future<WeatherForecastModel2> forecastObject;
   String _cityName = "London";
   @override
   void initState(){
@@ -28,9 +29,9 @@ class _WeatherState extends State<WeatherForecast>{
         children: <Widget>[
           textFieldView(),
           Container(
-            child: FutureBuilder<WeatherForecastModel>(
+            child: FutureBuilder<WeatherForecastModel2>(
               future: forecastObject,
-              builder: (BuildContext context, AsyncSnapshot<WeatherForecastModel> snapshot){
+              builder: (BuildContext context, AsyncSnapshot<WeatherForecastModel2> snapshot){
                 if (snapshot.hasData){
                   return Column(
                     children: <Widget>[
@@ -78,6 +79,6 @@ class _WeatherState extends State<WeatherForecast>{
     );
   }
 
-  Future<WeatherForecastModel> getWeather({String cityName}) =>
+  Future<WeatherForecastModel2> getWeather({String cityName}) =>
       new Network().getWeatherForecast(cityName: _cityName);
 }

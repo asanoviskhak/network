@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:network/weather_forecast/model/weather_forecast_model.dart';
 import 'package:network/weather_forecast/network/network.dart';
 import 'package:network/weather_forecast/ui/bottom_view.dart';
-import 'dart:convert';
-
-import 'model/weather_forecast_model2.dart';
+import 'package:network/parsing_json/WeatherForecastModel2.dart';
 import 'ui/body_view.dart';
 class WeatherForecast extends StatefulWidget{
   @override
@@ -13,7 +10,7 @@ class WeatherForecast extends StatefulWidget{
 
 class _WeatherState extends State<WeatherForecast>{
   Future<WeatherForecastModel2> forecastObject;
-  String _cityName = "London";
+  String _cityName = "Berlin";
   @override
   void initState(){
     super.initState();
@@ -25,29 +22,38 @@ class _WeatherState extends State<WeatherForecast>{
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
-      body: ListView(
-        children: <Widget>[
-          textFieldView(),
-          Container(
-            child: FutureBuilder<WeatherForecastModel2>(
-              future: forecastObject,
-              builder: (BuildContext context, AsyncSnapshot<WeatherForecastModel2> snapshot){
-                if (snapshot.hasData){
-                  return Column(
-                    children: <Widget>[
-                      bodyView(snapshot),
-                      bottomView(snapshot, context),
-                    ],
-                  );
-                }
-                else{
-                  return Container(
-                    child: Center(child: CircularProgressIndicator(),),
-                  );
-                }
-              }),
+      body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+              image: NetworkImage("https://cdn.pixabay.com/photo/2019/06/04/16/07/mountains-4251750_960_720.jpg"),
+              fit: BoxFit.fill,
           ),
-        ],
+        ),
+        child: ListView(
+          physics: BouncingScrollPhysics(),
+          children: <Widget>[
+            textFieldView(),
+            Container(
+              child: FutureBuilder<WeatherForecastModel2>(
+                future: forecastObject,
+                builder: (BuildContext context, AsyncSnapshot<WeatherForecastModel2> snapshot){
+                  if (snapshot.hasData){
+                    return Column(
+                      children: <Widget>[
+                        bodyView(snapshot),
+                        bottomView(snapshot, context),
+                      ],
+                    );
+                  }
+                  else{
+                    return Container(
+                      child: Center(child: CircularProgressIndicator(),),
+                    );
+                  }
+                }),
+            ),
+          ],
+        ),
       ),
         /*appBar: AppBar(
           title: Text("Forecast"),

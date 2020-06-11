@@ -1,7 +1,9 @@
+import 'dart:ui';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:network/weather_forecast/model/weather_forecast_model.dart';
-import 'package:network/weather_forecast/model/weather_forecast_model2.dart';
+import 'package:network/parsing_json/WeatherForecastModel2.dart';
 
 import 'forecast_card.dart';
 
@@ -10,14 +12,24 @@ Widget bottomView(AsyncSnapshot<WeatherForecastModel2> snapshot, BuildContext co
   return Column(
     mainAxisAlignment: MainAxisAlignment.start,
     children: <Widget>[
-      Text("24 Hours forecast".toUpperCase(),
-      style: TextStyle(
-        fontSize: 14,
-        color: Colors.grey[600]
-      ),
+      ClipRRect(
+        
+        borderRadius: BorderRadius.circular(4),
+        child: Container(
+          padding: EdgeInsets.all(4),
+          decoration: BoxDecoration(
+            color: Color(0x77000000),
+          ),
+          child: Text("3 day forecast".toUpperCase(),
+          style: TextStyle(
+            fontSize: 14,
+            color: Colors.white
+          ),
+          ),
+        ),
       ),
       Container(
-      height: 200,
+      height: 225,
       padding: EdgeInsets.symmetric(vertical: 16),
       child: ListView.separated(
         physics: BouncingScrollPhysics(),
@@ -28,8 +40,7 @@ Widget bottomView(AsyncSnapshot<WeatherForecastModel2> snapshot, BuildContext co
         itemBuilder: (context, index) => ClipRRect(
           borderRadius: BorderRadius.all(Radius.circular(8)),
           child: Container(
-            width: MediaQuery.of(context).size.width/2.3,
-            height: 200,
+            width: MediaQuery.of(context).size.width/2.25,
             child: forecastCard(snapshot, index),
             decoration: BoxDecoration(
                 gradient: LinearGradient(

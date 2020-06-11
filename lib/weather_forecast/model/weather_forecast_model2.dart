@@ -1,27 +1,30 @@
+import 'dart:convert';
+
+WeatherForecastModel2 weatherForecastModel2FromJson(String str){ return WeatherForecastModel2.fromJson(json.decode(str));}
+
+String weatherForecastModel2ToJson(WeatherForecastModel2 data) {  return json.encode(data.toJson());}
+
 class WeatherForecastModel2 {
   Location location;
   Current current;
   Forecast forecast;
-
-  WeatherForecastModel2({this.location, this.current, this.forecast});
+  Alert alert;
+  WeatherForecastModel2({this.location, this.current, this.forecast, this.alert});
 
   WeatherForecastModel2.fromJson(Map<String, dynamic> json) {
     location = json['location'] != null ? new Location.fromJson(json['location']) : null;
     current = json['current'] != null ? new Current.fromJson(json['current']) : null;
     forecast = json['forecast'] != null ? new Forecast.fromJson(json['forecast']) : null;
+    alert = json['alert'] != null ? new Alert.fromJson(json['alert']) : null;
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.location != null) {
-      data['location'] = this.location.toJson();
-    }
-    if (this.current != null) {
-      data['current'] = this.current.toJson();
-    }
-    if (this.forecast != null) {
-      data['forecast'] = this.forecast.toJson();
-    }
+    data['location'] = this.location.toJson();
+    data['current'] = this.current.toJson();
+    data['forecast'] = this.forecast.toJson();
+    data['alert'] = this.alert.toJson();
+    print(data);
     return data;
   }
 }
@@ -66,17 +69,17 @@ class Location {
 class Current {
   int lastUpdatedEpoch;
   String lastUpdated;
-  double tempC;
-  double tempF;
+  int tempC;
+  int tempF;
   int isDay;
   Condition condition;
   double windMph;
   double windKph;
   int windDegree;
   String windDir;
-  int pressureMb;
+  double pressureMb;
   double pressureIn;
-  int precipMm;
+  double precipMm;
   double precipIn;
   int humidity;
   int cloud;
@@ -84,7 +87,7 @@ class Current {
   double feelslikeF;
   int visKm;
   int visMiles;
-  int uv;
+  double uv;
   double gustMph;
   double gustKph;
 
@@ -316,3 +319,15 @@ class Astro {
   }
 }
 
+class Alert {
+
+
+  Alert();
+
+Alert.fromJson(Map<String, dynamic> json);
+
+Map<String, dynamic> toJson() {
+  final Map<String, dynamic> data = new Map<String, dynamic>();
+  return data;
+}
+}
